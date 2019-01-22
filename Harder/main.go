@@ -7,10 +7,12 @@ import (
 var resultMap = make(map[string] []int)
 
 func main(){
-    Tandem("GAGGCATCATCATCATCATTGCC")
+	setSubstringToMap("GAGGCATCATCATCATCATTGCCCATCAT")
+	findTandemFromMap()
+
 }
 
-func Tandem(input string){
+func setSubstringToMap(input string){
 	
 
 	for i := range input {
@@ -29,7 +31,7 @@ func Tandem(input string){
 			
 		}
 	}
-	fmt.Println(resultMap)
+	// fmt.Println(resultMap)
 	
 }
 
@@ -40,4 +42,34 @@ func setIgnoreValue(key string){
 		resultMap[ignoreKey] = []int{-1}
 	}
 		
+}
+
+func findTandemFromMap(){
+	for k, mapVal := range resultMap {
+		var startIndex int
+		var repeatedTimes int
+		if mapVal[0] != -1 && len(mapVal) > 1{
+			// fmt.Println("key : ", k, mapVal)
+			for i,repeatIndex := range mapVal {
+				if startIndex == 0 {
+					startIndex = repeatIndex
+					repeatedTimes = 1
+				}else{
+					if (repeatIndex - mapVal[i-1]) == len(k) {
+						repeatedTimes += 1
+					}else{
+						if repeatedTimes > 1{
+							fmt.Println(k,startIndex,repeatedTimes)
+						}
+						startIndex = repeatIndex
+						repeatedTimes = 1
+					}
+				}
+
+			}
+		}
+		if repeatedTimes > 1{
+			fmt.Println(k,startIndex,repeatedTimes)
+		}
+	}
 }
