@@ -5,5 +5,9 @@ import (
 )
 
 func main(){
-    fmt.Println("X")
+    
+}
+
+func Tandem(){
+	fmt.Println("X")
 }
