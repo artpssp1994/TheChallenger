@@ -14,19 +14,21 @@ func main(){
 	fmt.Print("Enter text: ")
 	text, _ := reader.ReadString('\n')
 
-	//Call tandem to retrive map that have 
-	//tandem word as key and repeated times as value
-	ansMap := tandem(text)
+	//Call tandem to retrive map 
+	tandem(text)
 
-	//Set response to json format
-	j, _ := json.Marshal(ansMap)
-	fmt.Println(string(j))
+
 }
 
 //tandem - Receive text string and return answer map
 func tandem(text string) map[string]int {
 	mSubStringIndex := createMapSubStringAndIndex(text)
 	ansMap := findTandemFromMap(mSubStringIndex)
+
+	//Set response to json format
+	j, _ := json.Marshal(ansMap)
+	fmt.Println(string(j))
+
 	return ansMap
 }
 
