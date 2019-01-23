@@ -39,19 +39,19 @@ func createMapSubStringAndIndex(input string) map[string] []int{
 	mSubStringIndex := make(map[string] []int)
 	//loop in to find Tandem repeat from size 3 to 10
 	for size := 3; size <= 10; size++ {
-		for i := range input {
-			if i + size < len(input) + 1 {
-				frameValue := input[i:i+size]
-				if val, ok := mSubStringIndex[frameValue]; ok {
-					if val[0] != -1 {
-						mSubStringIndex[frameValue] = append(mSubStringIndex[frameValue],i)
-						setIgnoreValue(frameValue,&mSubStringIndex)
-					}
-				}else{
-					mSubStringIndex[frameValue] = []int{i}
+		i := 0
+		for i + size < len(input) + 1 {
+			frameValue := input[i:i+size]
+			if val, ok := mSubStringIndex[frameValue]; ok {
+				if val[0] != -1 {
+					mSubStringIndex[frameValue] = append(mSubStringIndex[frameValue],i)
 					setIgnoreValue(frameValue,&mSubStringIndex)
 				}
+			}else{
+				mSubStringIndex[frameValue] = []int{i}
+				setIgnoreValue(frameValue,&mSubStringIndex)
 			}
+			i += 1
 		}
 	}
 	return mSubStringIndex
